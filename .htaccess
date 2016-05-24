@@ -1,0 +1,17 @@
+RewriteEngine On
+
+RewriteRule ^(blog)($|/) - [L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+
+#rewrite rules for the blog folder.
+#all requests for the blog folder will proceed straight to the folder
+# all other request will go to index.php
+#RewriteRule ^(blog)($|/) - [L]
+
+RewriteRule ^.*$ - [NC,L]
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC]

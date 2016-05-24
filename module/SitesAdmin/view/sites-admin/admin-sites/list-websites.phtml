@@ -1,0 +1,102 @@
+<?php
+
+$this->headTitle($this->headTitle);
+
+$baseUrl = $this->basePath();
+        
+if (defined('RUNNING_FROM_ROOT'))
+{
+    $baseUrl .= '/public';
+}
+
+?>
+
+</br> </br>
+   <div class="content">
+        <div class="row">
+            <div class="large-12 columns">
+                <h1 class="row-title">List Of Websites  </h1>
+                <h5>To add A New Website 
+                    <a href="<?php echo $this->url('adminsites', array('action'=>'create-site-url'));?>">
+                        CLICK HERE 
+                    </a>
+                </h5>
+                </br></br>
+                <div class="panel">    
+                    <div class="members">
+                        <table style="width:95%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th width="250"><a href="#">Site Name</a></th>
+                                <th width="500"><a href="#">WebSite </a></th>
+                                <th width="140"><a href="#" class="desc">Date Added</a></th>
+                                <th width="130"><a href="#">Edit</a></th>
+                                <th width="160" ><a href="#">Add New Page</a></th>
+                                <th width="160" ><a href="#">Show All Pages</a></th>
+                                
+                                <th class="actions"></th>
+                                <th class="actions"></th>
+                            </tr>
+                          
+                            <?php foreach ($paginator as $data): 
+                            
+           // var_dump($data);die();                
+           ?>  
+                            <?php $date = ($data['dateSubmitted']!= null) ? "{$data['dateSubmitted']->format('d/m/Y')}" : null; ?> 
+                            <?php $id   = $this->escapeHtml( $data['siteId']) ?>      
+                                    <tr>
+                                        <td width="250" style="text-align:center;"><?php echo $this->escapeHtml($data['siteName']) ?> </td>
+                                        <td width="500" style="text-align:center;">
+                                            <a href="<?php echo $data['websiteURL'] ?>">
+                                                <?php echo $this->escapeHtml($data['websiteURL']) ?>
+                                            </a>&nbsp;
+                                        </td>
+                                        <td width="140" style="text-align:center;"><?php echo $date ?></td>
+                                        <td width="130" style="text-align:center;"> 
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'edit-site-url', 'id'=>$id));?>">
+                                                edit 
+                                            </a>   
+                                        </td>
+                                        <td width="160" style="text-align:center;">
+                                            <a href="<?php echo $this->url('adminsitespages', array('action'=>'register-site-page-url', 'id'=>$id));?>">
+                                                Add New Page  
+                                            </a>
+                                        </td>
+                                        <td width="160" style="text-align:center;">
+                                            <a href="<?php echo $this->url('adminsitespages', array('action'=>'show-site-page', 'id'=>$id));?>">
+                                                Show All Pages  
+                                            </a>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'edit', 'id'=>$id));?>">
+                                                Approve 
+                                            </a>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'delete-site-url', 'id'=>$id));?>"
+                                            onclick="if (confirm(&#039;Are you sure you want to delete  <?php echo $data['websiteURL'] ?>?&#039;)) 
+                                               { document.post_568bad0a1c352.submit(); } event.returnValue = false; return false;"  > 
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                
+                            <?php endforeach; ?>
+                  
+                        </table> 
+                        <div class="paging">
+                            <?php
+                                echo $this->paginationControl(
+                                    $paginator, 'Sliding', 'site-url-paginator-slider', array('order_by' => $order_by, 'order' => $order)
+                                 );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</br></br></br></br>
+
+ <script>
+    $(document).foundation();
+  </script>    

@@ -1,0 +1,72 @@
+<?php
+
+$title = 'Register';
+$this->headTitle($title);
+
+
+$this->headTitle($this->title);
+
+$baseUrl = $this->basePath();
+        
+if (defined('RUNNING_FROM_ROOT'))
+{
+    $baseUrl .= '/public';
+}
+
+$form->setAttribute('action', $this->url('adminsites', array('action'=>'create-site-url')));
+$form->prepare();
+$params = $form->get('registerSiteUrl');
+
+?>
+
+<div class="row">
+    <div class="medium-8 medium-offset-2 end columns center">
+    
+        <div class="row">
+            <div class="medium-8 columns center registerform">
+                
+                <?php
+               
+                echo $this->form()->openTag($form);
+                ?>
+                        <h1 class="row-title">Register New Site's Home Page URL </h1>
+                        <p>Form For Registering The Home Page Of A Site </p>
+                        <p>If you would like to register the individual pages of a site please 
+                           <a  href="<?php echo $this->url('adminsitespages', array('action'=>'register-site-page-url'));?>">
+                               click here
+                           </a> 
+                        </p>
+                        </br> </br>
+                        <fieldset>                            
+                            <div class="input text required">
+                                <label for="MemberFirstName">Full URL Of The Site Home Page* (eg "https://www.facebook.com" ): </label>
+                                <?php  echo $this->formRow($params->get('urlSiteName'));?>                                
+                            </div>
+                            <div class="input text required">
+                                <label for="MemberLastName">The site's Name (e.g Facebook)*: </label>
+                                <?php  echo $this->formRow($params->get('siteName'));?>                                
+                            </div>
+                            <div class="input text required">
+                                <label for="MemberLastName">The Main Country That The Site Will Be Showed In *: </label>
+                                <?php  echo $this->formRow($params->get('countryId'));?>                                
+                            </div>
+                        </fieldset>
+                        <div class="submit">
+                            <?php  echo $this->formRow($params->get('id'));?>
+                            <?php  echo $this->formElement($form->get('submit')) ; ?>
+                        </div>
+                    <?php echo $this->form()->closeTag(); ?>
+            </div>            
+            <div class="medium-4 columns">
+                
+            </div>
+        </div>
+    </div>
+</div>
+      
+ 
+        
+        
+   
+
+ 

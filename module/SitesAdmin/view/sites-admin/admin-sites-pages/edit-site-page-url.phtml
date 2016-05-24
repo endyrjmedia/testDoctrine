@@ -1,0 +1,67 @@
+<?php
+
+$title = 'Register';
+$this->headTitle($title);
+
+
+$this->headTitle($this->title);
+
+$baseUrl = $this->basePath();
+        
+if (defined('RUNNING_FROM_ROOT'))
+{
+    $baseUrl .= '/public';
+}
+
+$form->setAttribute('action', $this->url('adminsitespages', array('action'=>'edit-site-page-url')));
+$form->prepare();
+$params = $form->get('registerSiteUrl');
+
+?>
+
+<div class="row">
+    <div class="medium-8 medium-offset-2 end columns center">
+    
+        <div class="row">
+            <div class="medium-8 columns center registerform">
+                
+                <?php
+               
+                echo $this->form()->openTag($form);
+                ?>
+                        <h1 class="row-title">Edit The Site Page </h1>
+                      
+                        </br> </br>
+                        <fieldset>                            
+                            <div class="input text required">
+                                <label for="MemberFirstName">Full URL Of The Page* (eg "http://www.35p-cheap-phone-sex.com/new-girls" ): </label>
+                                <?php  echo $this->formRow($params->get('urlSitePage'));?>                                
+                            </div>
+                            <div class="input text required">
+                                <label for="MemberLastName">The page Name (e.g new-girls)*: </label>
+                                <?php  echo $this->formRow($params->get('pageName'));?>                                
+                            </div>
+                            <div class="input text required">
+                                <label for="MemberLastName">The Site That the page relates to  *: </label>
+                                <?php  echo $this->formRow($params->get('siteId'));?>                                
+                            </div>
+                        </fieldset>
+                        <div class="submit">
+                            <?php  echo $this->formRow($params->get('id'));?>
+                            <?php  echo $this->formElement($form->get('submit')) ; ?>
+                        </div>
+                    <?php echo $this->form()->closeTag(); ?>
+            </div>            
+            <div class="medium-4 columns">
+                
+            </div>
+        </div>
+    </div>
+</div>
+      
+ 
+        
+        
+   
+
+ 

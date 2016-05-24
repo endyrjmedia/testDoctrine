@@ -1,0 +1,85 @@
+<?php
+
+$this->headTitle($this->headTitle);
+
+$baseUrl = $this->basePath();
+        
+if (defined('RUNNING_FROM_ROOT'))
+{
+    $baseUrl .= '/public';
+ 
+}
+
+?>
+
+</br> </br>
+   <div class="content">
+        <div class="row">
+            <div class="large-12 columns">
+              
+                <div class="panel">    
+                    <div class="members">
+                        <table style="width:95%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th width="250"><a href="/admin/members/index/sort:name/direction:asc">Name</a></th>
+                                <th width="500"><a href="/admin/members/index/sort:email/direction:asc">Website</a></th>
+                                <th width="140"><a href="/admin/members/index/sort:date_joined/direction:asc" class="desc">Joined</a></th>
+                                <th width="130"><a href="/admin/members/index/sort:mobile/direction:asc">Mobile</a></th>
+                                <th class="actions"></th>
+                                <th class="actions"></th>
+                                <th class="actions"></th>
+                            </tr>
+                          
+                            <?php foreach ($paginator as $data): ?>
+             
+                            <?php $date = ($data['dateSubmitted']!= null) ? "{$data['dateSubmitted']->format('d/m/Y')}" : null; ?> 
+                            <?php $id   = $this->escapeHtml( $data['id']) ?>      
+
+                                    <tr>
+                                        <td width="250" ><?php echo $this->escapeHtml($data['siteName']) . $this->escapeHtml($data['siteName']) ?> </td>
+                                        <td width="500">
+                                            <a href="<?php echo $data['websiteURL'] ?>">
+                                                <?php echo $this->escapeHtml($data['websiteURL']) ?>
+                                            </a>&nbsp;
+                                        </td>
+                                        <td width="140"><?php echo $date ?></td>
+                                        <td width="130"><?php echo $this->escapeHtml($user['mobile']) ?></td>
+                                        <td>
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'edit-site-url', 'id'=>$this->escapeHtml($user['id'])));?>">
+                                                edit 
+                                            </a>   
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'edit', 'id'=>$this->escapeHtml($user['id'])));?>">
+                                                Approve 
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo $this->url('adminsites', array('action'=>'delete', 'id'=>$this->escapeHtml($user['id'])));?>"
+                                            onclick="if (confirm(&#039;Are you sure you want to delete #<?php echo $id ?>?&#039;)) 
+                                               { document.post_568bad0a1c352.submit(); } event.returnValue = false; return false;"  > 
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                
+                            <?php endforeach; ?>
+                  
+                        </table> 
+                        <div class="paging">
+                            <?php
+                                echo $this->paginationControl(
+                                    $paginator, 'Sliding', 'site-url-paginator-slider', array('order_by' => $order_by, 'order' => $order)
+                                 );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</br></br></br></br>
+
+ <script>
+    $(document).foundation();
+  </script>    
